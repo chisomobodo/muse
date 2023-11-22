@@ -41,6 +41,7 @@ onBeforeMount(() => {
 
 const signout = () => {
     localStorage.removeItem('loggedinUser');
+    router.replace('/login');
 }
 
 const currentSegment = ref('');
