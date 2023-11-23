@@ -41,11 +41,11 @@ function formatNumber(number) {
     const million = 1e6;
 
     if (number >= billion) {
-        return (number / billion).toFixed(2) + 'B';
+        return (number / billion)?.toFixed(2) + 'B';
     } else if (number >= million) {
-        return (number / million).toFixed(2) + 'M';
+        return (number / million)?.toFixed(2) + 'M';
     } else {
-        return number.toString();
+        return number?.toString();
     }
 }
 
@@ -63,7 +63,7 @@ const getArtist = async () => {
     artist.value = data;
 }
 
-onBeforeMount(() => {   
+onMounted(() => {   
     getArtist();
 
 })
