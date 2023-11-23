@@ -32,7 +32,7 @@
 
                     <div class="w-full flex max-sm:flex-col gap-3 max-sm:gap-1 justify-start items-center max-sm:items-start rounded-md  max-sm:p-1 cursor-pointer">
                     <div class="w-[50px] h-[50px] max-sm:w-[35px] max-sm:h-[35px] rounded-md overflow-hidden">
-                        <img class="w-full h-full object-contain" src="https://media.istockphoto.com/id/457945109/photo/hands-of-a-dj-mixing-music-at-disco.jpg?s=612x612&w=0&k=20&c=zFshaN_FtucyUvNCCrBmxmHhECvIrvJ3PucAHdK49no=" />
+                        <img class="w-full h-full object-contain" :src="track?.album?.images?.[0]?.url" />
                     </div>
                     <div class="flex flex-col gap-3 max-sm:gap-1.5">
                         <span class="text-white max-sm:text-sm">{{playList?.[0]?.track?.name}}</span>
@@ -43,16 +43,16 @@
                 </div>
                </div>
 
-                <span class="text-gray-400 max-sm:text-sm">{{`${playList?.[0]?.track?.playcount/1000000}M`}}</span>
+                <span class="text-gray-400 max-sm:text-sm">{{`${track?.popularity}`}}</span>
 
-                <span class="text-gray-400 max-sm:text-sm">{{fromatMilliSec(playList?.[0]?.track?.duration?.totalMilliseconds)}}</span>
+                <span class="text-gray-400 max-sm:text-sm">{{track?.duration_ms}}</span>
             </div>
             <!-- List Body -->
         </div>
         <!-- List -->
 
         <div class="w-[50%] max-sm:w-full rounded-lg bg-gray-950 border-[1px] border-gray-600 p-2">
-            <LayoutPlayer v-if="currentSong" :currentSong="currentSong" />
+            <LayoutPlayer v-if="track" :currentSong="track" />
         </div>
         </div>
 
@@ -62,21 +62,12 @@
     </div>
 </template>
 <script setup>
-const preview_url = ref('');
-const playList = ref('');
+const track = ref('');
 const playListImg = ref('');
 const state = ref('pending');
-const currentSong = ref(null);
 
 const { id } = useRoute().params;
-console.log("id", id)
 const trackId = id[0];
-console.log(trackId);
-
-const fullPath = useRoute().fullPath;
-const urlRegex = /https?:\/\/\S+/;
-
-preview_url.value = fullPath.match(urlRegex)[0];
 
 
 const fromatMilliSec = (milliseconds) => {
@@ -87,87 +78,37 @@ const fromatMilliSec = (milliseconds) => {
     return formattedDuration;
 }
 
-const getPlayList = async () => {
-    console.log('getting playlist')
-   const url = `https://spotify81.p.rapidapi.com/album_tracks?id=${trackId}&offset=0&limit=300`;
-    const options = {
+const getTrack = async () => {
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const res = await fetch(`https://api.spotify.com/v1/tracks/${trackId}`, {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '7cfe79fb4cmsha97c9c0ea2a5ac4p1fd173jsn0f3c71c9c278',
-            'X-RapidAPI-Host': 'spotify81.p.rapidapi.com'
+            Authorization: `Bearer ${accessToken}`,
         }
-    };
-
-    try {
-        state.value = 'loading';
-        const response = await fetch(url, options);
-        const result = await response.json();
-        playList.value = result?.data?.album?.tracks?.items;
-        console.log(playList.value)
-
-    } catch (error) {
-        console.error(error);
-    } finally {
-        state.value = 'not-loading';
-    }
+    })
+    const data = await res.json();
+    console.log('track.value', data)
+    track.value = data;
 }
 
 const getPlayListImg = async () => {
-   const url = `https://spotify81.p.rapidapi.com/tracks?ids=${trackId}`;
-    const options = {
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const res = await fetch(`https://api.spotify.com/v1/tracks/${trackId}`, {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '7cfe79fb4cmsha97c9c0ea2a5ac4p1fd173jsn0f3c71c9c278',
-            'X-RapidAPI-Host': 'spotify81.p.rapidapi.com'
+            Authorization: `Bearer ${accessToken}`,
         }
-    };
-
-    try {
-        state.value = 'loading';
-        const response = await fetch(url, options);
-        const result = await response.json();
-        // const matchItem = result?.items?.find(item => item?.track?.album?.id == trackId);
-        // console.log(result?.items?.[0]?.track?.album?.id)
-        // playListImg.value = matchItem?.album?.images?.[0]?.url;
-        playListImg.value = result?.tracks?.[0]?.album?.images?.[0]?.url;
-        console.log(playListImg.value)
-    } catch (err) {
-        console.log(err)
-    }
+    })
+    const data = await res.json();
+    console.log('track.value', data)
+    track.value = data;
 }
 
-// onBeforeMount(() => {
-//     if (!localStorage.getItem('loggedinUser')) {
-//         router.push('/login')
-//     }
-
+onMounted(() => {
+    getTrack();
     
-//      getPlayList();
-//     getPlayListImg();
-//     if (playList?.value?.[0]?.track?.playcount / 1000000 === 'NaN') {
-//         console.log('NAn')
-//         getPlayList();
-//         getPlayListImg();
-//     }
-//     console.log(currentSong.value)
+})
 
-//      currentSong.value = {
-//         preview_url: preview_url.value,
-//         name: playList.value?.[0]?.track?.name,
-//         duration: fromatMilliSec(playList.value?.[0]?.track?.duration?.totalMilliseconds)
-//     }
-// })
-
-// onMounted(() => {
-//     getPlayList();
-//     getPlayListImg();
-//     if (playList?.value?.[0]?.track?.playcount / 1000000 === 'NaN') {
-//         getPlayList();
-//         getPlayListImg();
-//     }
-   
-    
-// })
 
 
 

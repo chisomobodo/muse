@@ -4,7 +4,7 @@
         <div class="fonts-sans font-semibold text-lg">{{currentSong?.name}}</div>
 
        <div>
-                <video ref="videoPlayer" class="w-[1px] h-[1px]" controls="" autoplay="" name="media"><source :src="currentSong?.preview_url" type="audio/mpeg"></video>
+                <video ref="videoPlayer" class="w-[0px] h-[0px]" controls="" name="media"><source :src="currentSong?.preview_url" type="audio/mpeg"></video>
                 <IconPlay v-if="!isPlaying" @click="toggleVideo" color="text-white" cls="w-[50px] h-[50px] text-white cursor-pointer active:w-[45px] active:h-[45px]" />
                 <IconPause v-else @click="toggleVideo" color="text-white" cls="w-[50px] h-[50px] text-white cursor-pointer active:w-[45px] active:h-[45px]" />
             </div>
@@ -23,7 +23,7 @@ const props = defineProps(['currentSong']);
 
 const videoPlayer = ref(null);
 
-const isPlaying = ref(true);
+const isPlaying = ref(false);
 
 const toggleVideo = () => {
     console.dir(videoPlayer.value);

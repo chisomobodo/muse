@@ -24,14 +24,6 @@ const props = defineProps(['title', 'link', 'items', 'state']);
 const router = useRouter();
 
 
-onMounted(() => {
-    console.log('mounted')
-    // items?.forEach(item => {
-    //     console.log(item);
-    // })
-    // getracksImgs()
-})
-
 
 const goto = (to, query) => {
     console.log('to', to, 'query', query);
