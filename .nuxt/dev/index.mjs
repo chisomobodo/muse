@@ -60,7 +60,11 @@ const _inlineRuntimeConfig = {
       }
     }
   },
-  "public": {}
+  "public": {
+    "spotifyClientID": "bdb3b1e8bde74aa19a2429213693b557",
+    "spotifyClientSecret": "6493930f9bb642898f542a9c536cb9dc",
+    "redirectUri": "http://localhost:3000/callback"
+  }
 };
 const ENV_PREFIX = "NITRO_";
 const ENV_PREFIX_ALT = _inlineRuntimeConfig.nitro.envPrefix ?? process.env.NITRO_ENV_PREFIX ?? "_";
@@ -665,9 +669,11 @@ const errorHandler = (async function errorhandler(error, event) {
   return send(event, html);
 });
 
+const _lazy_CUBiIf = () => Promise.resolve().then(function () { return spotifyAuth$1; });
 const _lazy_AHa71p = () => Promise.resolve().then(function () { return renderer$1; });
 
 const handlers = [
+  { route: '/api/spotify-auth', handler: _lazy_CUBiIf, lazy: true, middleware: false, method: undefined },
   { route: '/__nuxt_error', handler: _lazy_AHa71p, lazy: true, middleware: false, method: undefined },
   { route: '/**', handler: _lazy_AHa71p, lazy: true, middleware: false, method: undefined }
 ];
@@ -851,6 +857,18 @@ const template$1 = _template;
 const errorDev = /*#__PURE__*/Object.freeze({
   __proto__: null,
   template: template$1
+});
+
+const spotifyAuth = defineEventHandler(async () => {
+  const { spotifyClientID, redirectUri } = useRuntimeConfig().public;
+  const scope = "user-read-private user-library-read user-read-email streaming user-read-playback-state user-modify-playback-state user-read-currently-playing user-read-recently-played playlist-modify-public playlist-modify-private";
+  const authorizationUrl = `https://accounts.spotify.com/authorize?client_id=${spotifyClientID}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=${encodeURIComponent(scope)}`;
+  return authorizationUrl;
+});
+
+const spotifyAuth$1 = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  default: spotifyAuth
 });
 
 const Vue3 = version.startsWith("3");

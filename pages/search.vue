@@ -39,9 +39,7 @@ const playLists = ref(null);
 const state = ref('pending');
 
 onBeforeMount(() => {
-    if (!localStorage.getItem('loggedinUser')) {
-        router.push('/login')
-    }
+    
 })
 
 const search = async () => {

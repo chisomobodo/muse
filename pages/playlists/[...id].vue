@@ -136,38 +136,38 @@ const getPlayListImg = async () => {
     }
 }
 
-onBeforeMount(() => {
-    if (!localStorage.getItem('loggedinUser')) {
-        router.push('/login')
-    }
+// onBeforeMount(() => {
+//     if (!localStorage.getItem('loggedinUser')) {
+//         router.push('/login')
+//     }
 
     
-     getPlayList();
-    getPlayListImg();
-    if (playList?.value?.[0]?.track?.playcount / 1000000 === 'NaN') {
-        console.log('NAn')
-        getPlayList();
-        getPlayListImg();
-    }
-    console.log(currentSong.value)
+//      getPlayList();
+//     getPlayListImg();
+//     if (playList?.value?.[0]?.track?.playcount / 1000000 === 'NaN') {
+//         console.log('NAn')
+//         getPlayList();
+//         getPlayListImg();
+//     }
+//     console.log(currentSong.value)
 
-     currentSong.value = {
-        preview_url: preview_url.value,
-        name: playList.value?.[0]?.track?.name,
-        duration: fromatMilliSec(playList.value?.[0]?.track?.duration?.totalMilliseconds)
-    }
-})
+//      currentSong.value = {
+//         preview_url: preview_url.value,
+//         name: playList.value?.[0]?.track?.name,
+//         duration: fromatMilliSec(playList.value?.[0]?.track?.duration?.totalMilliseconds)
+//     }
+// })
 
-onMounted(() => {
-    getPlayList();
-    getPlayListImg();
-    if (playList?.value?.[0]?.track?.playcount / 1000000 === 'NaN') {
-        getPlayList();
-        getPlayListImg();
-    }
+// onMounted(() => {
+//     getPlayList();
+//     getPlayListImg();
+//     if (playList?.value?.[0]?.track?.playcount / 1000000 === 'NaN') {
+//         getPlayList();
+//         getPlayListImg();
+//     }
    
     
-})
+// })
 
 
 

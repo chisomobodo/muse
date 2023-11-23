@@ -19,10 +19,7 @@ const closeSideBar = () => {
 }
 
 onBeforeMount(() => {
-    console.log('before munt');
-    if (!localStorage.getItem('loggedinUser')) {
-        router.push('/login');
-    }
+   
 
 })
 

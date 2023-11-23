@@ -15,7 +15,11 @@ declare module 'nuxt/schema' {
    },
   }
   interface PublicRuntimeConfig {
+   spotifyClientID: string,
 
+   spotifyClientSecret: string,
+
+   redirectUri: string,
   }
 }
 declare module 'vue' {

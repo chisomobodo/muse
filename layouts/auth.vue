@@ -1,18 +1,10 @@
 <template lang="">
-    <div class="w-full h-full">
+    <div class="bg-black w-full h-[100vh] text-white">
         <slot></slot>
     </div>
 </template>
 <script setup>
-const router = useRouter();
 
-onBeforeMount(() => {
-    console.log('before munt');
-    if (!localStorage.getItem('loggedinUser')) {
-        router.push('/login');
-    }
-
-})
 </script>
 <style lang="">
     
