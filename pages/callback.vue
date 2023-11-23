@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h1>Spotify Callback Page</h1>
+    <div class="w-full h-[100vh] flex items-center justify-center">
+        <IconLoader />
     </div>
 </template>
 

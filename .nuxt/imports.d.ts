@@ -8,7 +8,7 @@ export { useAsyncData, useLazyAsyncData, useNuxtData, refreshNuxtData, clearNuxt
 export { useHydration } from '#app/composables/hydrate';
 export { useState, clearNuxtState } from '#app/composables/state';
 export { clearError, createError, isNuxtError, showError, useError } from '#app/composables/error';
-export { useFetch, useLazyFetch } from '#app/composables/fetch';
+export { useLazyFetch } from '#app/composables/fetch';
 export { useCookie } from '#app/composables/cookie';
 export { prerenderRoutes, useRequestHeaders, useRequestEvent, useRequestFetch, setResponseStatus } from '#app/composables/ssr';
 export { onNuxtReady } from '#app/composables/ready';
@@ -21,6 +21,6 @@ export { useRequestURL } from '#app/composables/url';
 export { onBeforeRouteLeave, onBeforeRouteUpdate, useLink } from '#vue-router';
 export { withCtx, withDirectives, withKeys, withMemo, withModifiers, withScopeId, onActivated, onBeforeMount, onBeforeUnmount, onBeforeUpdate, onDeactivated, onErrorCaptured, onMounted, onRenderTracked, onRenderTriggered, onServerPrefetch, onUnmounted, onUpdated, computed, customRef, isProxy, isReactive, isReadonly, isRef, markRaw, proxyRefs, reactive, readonly, ref, shallowReactive, shallowReadonly, shallowRef, toRaw, toRef, toRefs, triggerRef, unref, watch, watchEffect, watchPostEffect, watchSyncEffect, isShallow, effect, effectScope, getCurrentScope, onScopeDispose, defineComponent, defineAsyncComponent, resolveComponent, getCurrentInstance, h, inject, hasInjectionContext, nextTick, provide, defineModel, defineOptions, defineSlots, mergeModels, toValue, useModel, useAttrs, useCssModule, useCssVars, useSlots, useTransitionState, Component, ComponentPublicInstance, ComputedRef, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, MaybeRef, MaybeRefOrGetter, VNode } from 'vue';
 export { injectHead, useHead, useSeoMeta, useHeadSafe, useServerHead, useServerSeoMeta, useServerHeadSafe } from '@unhead/vue';
-export { useAccessToken } from '../composables/index';
+export { useAccessToken, useFetch } from '../composables/index';
 export { useNuxtDevTools } from '../node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools';
 export { definePageMeta } from '../node_modules/nuxt/dist/pages/runtime/composables';
