@@ -7,11 +7,11 @@
                   class="block w-full rounded-md border-0 py-1.5 text-gray-400 bg-transparent shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-2">Search</nuxt-link>
             </div>
 
-            <div class="flex gap-1 items-center font-bold max-sm:text-md">
+            <!-- <div class="flex gap-1 items-center font-bold max-sm:text-md">
                 <nuxt-link to="/login">Login</nuxt-link>|
                 <nuxt-link to="/signup">Signup</nuxt-link>
+            </div> -->
                 <!-- <nuxt-link v-if="" to=""></nuxt-link> -->
-            </div>
 
             </div>
     <div v-if="opened" @click="onPress" class="max-sm:fixed top-0 right-0 w-[100%] h-[100vh] z-[9] bg-transparent lg:hidden cursor-pointer"></div>
