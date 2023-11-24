@@ -1,6 +1,6 @@
 <template lang="">
     <!-- Desktop -->
-    <div class="max-sm:hidden w-[100vw] h-[100vh] flex gap-3 bg-black font-sans">
+    <div class="max-sm:flex-col w-[100vw] h-[100vh] flex gap-3 bg-black font-sans">
         <div class="w-full h-full">
             <img class="w-full h-full object-contain" :src="artist?.images?.[0]?.url" alt="">
         </div>
