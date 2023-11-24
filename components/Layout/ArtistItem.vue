@@ -43,7 +43,7 @@ const BASE = ref('');
 https://api.spotify.com/v1/tracks/3YYnfKM02WkygOwg6ozfrL
 
 onBeforeMount(() => {
-    BASE.value = 'http://localhost:3000';
+    BASE.value = 'https://muse-puce.vercel.app';
 })
 
 onMounted(() => {
